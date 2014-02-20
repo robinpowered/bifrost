@@ -1,0 +1,14 @@
+{
+  "NpmPackageName": "colors",
+  "autoUpdate": false,
+  "runOnBoot": false,
+  "transports": {
+    "rbn-websocket": {
+        "endpoint": "http://robin-grid.omrdev.com"
+    }
+  },
+  "interfaces": {
+  	"rbn-ble": {},
+  	"rbn-arduino": {}
+  }
+}
