@@ -8,7 +8,6 @@
     }
   },
   "interfaces": {
-  	"rbn-ble": {},
-  	"rbn-arduino": {}
+  	"rbn-ble": {}
   }
 }

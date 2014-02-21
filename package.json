@@ -1,15 +1,16 @@
 {
-  "name": "robin-pi-supervisor",
-  "version": "0.0.2",
+  "name": "rbn-pi",
+  "version": "0.0.1",
   "description": "Supervisor and updater for raspberry pis",
-  "scripts": {
-    "start": "node supervisor"
-  },
+  "main":"supervisor",
   "dependencies": {
     "debug": "~0.7.4",
     "winston": "~0.7.2",
     "semver": "~2.2.1",
     "forever-monitor": "~1.2.3",
-    "npm": "~1.4.3"
+    "npm": "~1.4.3",
+    "rbn-base": "latest",
+    "rbn-ble": "latest",
+    "rbn-websocket": "latest"
   }
 }
