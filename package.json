@@ -1,6 +1,6 @@
 {
   "name": "rbn-pi",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Supervisor and updater for raspberry pis",
   "main": "rbn-pi",
   "scripts": {
