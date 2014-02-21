@@ -16,7 +16,7 @@ class Supervisor extends EventEmitter
 		@log.info 'Started supervisor!'
 
 		# Polling interval!
-		@interval = 15000
+		@interval = 300000 # 5 minutes
 
 		# Updating flag
 		@updating = false
