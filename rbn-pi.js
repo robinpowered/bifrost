@@ -22,7 +22,7 @@
     function Supervisor() {
       var _this = this;
       this.log.info('Started supervisor!');
-      this.interval = 15000;
+      this.interval = 300000;
       this.updating = false;
       this.packages = {};
       NPM.load(function(err, npm) {
