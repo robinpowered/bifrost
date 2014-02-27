@@ -26,9 +26,10 @@ class Supervisor extends EventEmitter
 		# @loadPackages()
 
 		NPM.load (err, @npm) =>
-			# Install!
-			@install =>
-				@watchReleases()
+			# Start the script
+			@startRunning()
+			# Poll for new releases every once in a while
+			@watchReleases()
 
 	log: winston
 
