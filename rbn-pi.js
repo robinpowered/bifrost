@@ -27,9 +27,8 @@
       this.packages = {};
       NPM.load(function(err, npm) {
         _this.npm = npm;
-        return _this.install(function() {
-          return _this.watchReleases();
-        });
+        _this.startRunning();
+        return _this.watchReleases();
       });
     }
 
@@ -65,8 +64,8 @@
           for (_i = 0, _len = outdated.length; _i < _len; _i++) {
             pack = outdated[_i];
             if (pack[1].slice(0, 4) === 'rbn-') {
-              console.log("" + pack[1] + ": " + pack[3] + " > " + pack[2] + ", " + (semver.gt(pack[3], pack[2])));
-              if (semver.gt(pack[3], pack[2])) {
+              console.log("" + pack[1] + ": " + pack[3] + " > " + pack[2]);
+              if (semver.valid(pack[2]) && semver.valid(pack[3]) && semver.gt(pack[3], pack[2])) {
                 needsUpdate = true;
                 break;
               }
