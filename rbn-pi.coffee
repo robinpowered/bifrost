@@ -68,7 +68,7 @@ class Supervisor extends EventEmitter
 					if pack[1][0...4] is 'rbn-'
 						console.log "#{pack[1]}: #{pack[3]} > #{pack[2]}, #{semver.gt pack[3], pack[2]}"
 						# If version can update
-						if semver.gt pack[3], pack[2]
+						if semver.valid pack[2] and semver.valid pack[3] and semver.gt pack[3], pack[2]
 							# Needs an update!
 							needsUpdate = true
 							break
