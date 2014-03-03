@@ -6,5 +6,5 @@ PI_HOME="/home/pi/"
 RBN_PI="rbn-pi"
 FOREVER="forever"
 
-cd ${PI_HOME}/${RBN_PI} && ${FOREVER} start ${RBN_PI}.js
+cd ${PI_HOME}/${RBN_PI} && sudo ${FOREVER} start ${RBN_PI}.js
 
