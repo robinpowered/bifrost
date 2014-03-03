@@ -1,0 +1,1 @@
+@reboot    root    forever start $HOME/rbn-pi/rbn-pi.js >> /var/log/rbn-pi-start.log
