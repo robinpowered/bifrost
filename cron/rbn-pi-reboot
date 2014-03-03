@@ -1,1 +1,1 @@
-@reboot    root    forever start /home/pi/rbn-pi/rbn-pi.js >> /var/log/rbn-pi-start.log
+@reboot pi /home/pi/rbn-pi/start.sh
