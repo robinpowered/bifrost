@@ -1,6 +1,6 @@
 {
   "name": "rbn-pi",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Supervisor and updater for raspberry pis",
   "main": "rbn-pi",
   "repository": {
