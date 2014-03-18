@@ -16,8 +16,8 @@
     "semver": "~2.2.1",
     "forever-monitor": "~1.2.3",
     "npm": "~1.4.3",
-    "rbn-base": "latest",
-    "rbn-ble": "latest",
-    "rbn-websocket": "latest"
+    "rbn-base": "git+ssh://git@github.com/mcos/rbn-base.git",
+    "rbn-ble": "git+ssh://git@github.com/robinpowered/rbn-ble.git",
+    "rbn-websocket": "git+ssh://git@github.com/robinpowered/rbn-websocket.git"
   }
 }
