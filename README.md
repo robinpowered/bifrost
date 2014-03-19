@@ -78,4 +78,4 @@ The Robin OS is designed to make it easy to add custom modules.
 Creating an interface
 ---
 
-Your module should export a single class. Your constructor will be called 
+Your module should export a single class. Your constructor will be called.
