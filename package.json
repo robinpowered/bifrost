@@ -1,11 +1,11 @@
 {
-  "name": "rbn-pi",
+  "name": "bifrost",
   "version": "0.0.8",
   "description": "Supervisor and updater for raspberry pis",
   "main": "rbn-pi",
   "repository": {
     "type": "git",
-    "url": "http://github.com/robinpowered/rbn-pi.git"
+    "url": "http://github.com/robinpowered/bifrost.git"
   },
   "scripts": {
     "prepublish": "coffee -c rbn-pi.coffee"
