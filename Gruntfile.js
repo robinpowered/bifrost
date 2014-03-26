@@ -61,7 +61,7 @@
           options: {
             host: "",
             user: "pi",
-            remoteBase: "/home/pi/rbn-pi/node_modules/bifrost"
+            remoteBase: "/home/pi/bifrost"
           }
         }
       }
