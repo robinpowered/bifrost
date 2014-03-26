@@ -7,17 +7,31 @@
     "type": "git",
     "url": "http://github.com/robinpowered/bifrost.git"
   },
-  "scripts": {
-    "prepublish": "coffee -c rbn-pi.coffee"
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.7",
+    "grunt-contrib-copy": "~0.4.0",
+    "grunt-contrib-concat": "~0.1.3",
+    "grunt-contrib-coffee": "~0.6.4",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-rsync-2": "~0.1.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-simple-mocha": "~0.4.0",
+    "grunt-coffeelint": "0.0.8"
   },
   "dependencies": {
     "debug": "~0.7.4",
     "winston": "~0.7.2",
     "semver": "~2.2.1",
     "forever-monitor": "~1.2.3",
-    "npm": "~1.4.3",
-    "rbn-base": "git+ssh://git@github.com/mcos/rbn-base.git",
+    "npm": "~1.4.3"
+  },
+  "TODO": {
+    "bifrost-hub": "git+ssh://git@github.com/robinpowered/bifrost-hub.git",
     "rbn-ble": "git+ssh://git@github.com/robinpowered/rbn-ble.git",
-    "rbn-websocket": "git+ssh://git@github.com/robinpowered/rbn-websocket.git"
+    "rbn-websocket": "git+ssh://git@github.com/robinpowered/rbn-websocket.git",
+    "rbn-rfid": "git+ssh://git@github.com/robinpowered/rbn-rfid.git",
+    "rbn-arduino": "git+ssh://git@github.com/robinpowered/rbn-arduino.git"
   }
 }
