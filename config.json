@@ -8,7 +8,7 @@
     }
   },
   "interfaces": {
-  	"rbn-ble": {},
+    "rbn-ble": {},
     "rbn-rfid": {},
     "rbn-arduino": {}
   }
