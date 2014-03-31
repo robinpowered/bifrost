@@ -126,13 +126,13 @@ class Supervisor extends EventEmitter
     # Start the software in the current directory
     @log.info 'starting os...'
 
-    pjson = require "./node_modules/rbn-base/package.json"
+    pjson = require "./node_modules/bifrost-hub/package.json"
 
     startScript = pjson.main
 
     if startScript
 
-      @running = new forever.Monitor "./node_modules/rbn-base/#{startScript}.js",
+      @running = new forever.Monitor "./node_modules/bifrost-hub/#{startScript}.js",
         silent: false
         command: 'node'
 

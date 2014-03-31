@@ -3,8 +3,9 @@
 export NODE_ENV=production
 export PATH=/usr/local/bin:$PATH
 PI_HOME="/home/pi/"
+BIFROST="bifrost"
 RBN_PI="rbn-pi"
 FOREVER="forever"
 
-cd ${PI_HOME}/${RBN_PI} && sudo ${FOREVER} start ${RBN_PI}.js
+cd ${PI_HOME}/${BIFROST} && sudo ${FOREVER} start ${RBN_PI}.js
 

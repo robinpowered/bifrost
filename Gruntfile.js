@@ -36,6 +36,10 @@
               dest: 'dist/'
             },
             {
+              src: 'config.json',
+              dest: 'dist/'
+            },
+            {
               src: 'rbn-pi.js',
               dest: 'dist/'
             },
@@ -46,10 +50,6 @@
             {
               src: 'cron/**',
               dest: 'dist/'
-            },
-            {
-              src: 'node_modules/**',
-              dest: 'dist/',
             }
           ]
         }
@@ -91,14 +91,13 @@
         for (var i in hostArr) {
           var host = hostArr[i];
           grunt.config.set('rsync.pi.options.host', host);
-          console.log(grunt)
           grunt.task.run(['rsync:pi']);
         }
       }
 
       // 'rsync:pi'
     });
-    return grunt.registerTask('pi', ['rsync_pi']);
+    return grunt.registerTask('pi', ['compile', 'rsync_pi']);
   };
 
 }).call(this);

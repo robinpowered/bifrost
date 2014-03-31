@@ -146,10 +146,10 @@
       var pjson, startScript,
         _this = this;
       this.log.info('starting os...');
-      pjson = require("./node_modules/rbn-base/package.json");
+      pjson = require("./node_modules/bifrost-hub/package.json");
       startScript = pjson.main;
       if (startScript) {
-        this.running = new forever.Monitor("./node_modules/rbn-base/" + startScript + ".js", {
+        this.running = new forever.Monitor("./node_modules/bifrost-hub/" + startScript + ".js", {
           silent: false,
           command: 'node'
         });
