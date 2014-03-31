@@ -7,148 +7,145 @@ forever = require 'forever-monitor'
 NPM = require 'npm'
 config = require './config.json'
 
-
-
-
 class Supervisor extends EventEmitter
 
-	constructor: ()->
-		@log.info 'Started supervisor!'
+  constructor: ()->
+    @log.info 'Started supervisor!'
 
-		# Polling interval!
-		@interval = 300000 # 5 minutes
+    # Polling interval!
+    @interval = 300000 # 5 minutes
 
-		# Updating flag
-		@updating = false
+    # Updating flag
+    @updating = false
 
-		# Packages
-		@packages = {}
-		# @loadPackages()
+    # Packages
+    @packages = {}
+    # @loadPackages()
 
-		NPM.load (err, @npm) =>
-			# Start the script
-			@startRunning()
-			# Poll for new releases every once in a while
-			@watchReleases()
+    NPM.load (err, @npm) =>
+      # Start the script
+      @startRunning()
+      # Poll for new releases every once in a while
+      @watchReleases()
 
-	log: winston
+  log: winston
 
-	# Gets the tag of the currently running os
-	getCurrentRelease: (packageName) ->
-		try
-			pjson = require "./node_modules/#{packageName}/package.json"
-			@packages[packageName].current = pjson.version
-		catch err
-			@log.error err
-			@log.warn "Package #{packageName} does not exist, so this must be the first run."
-			@packages[packageName].current = null
+  # Gets the tag of the currently running os
+  getCurrentRelease: (packageName) ->
+    try
+      pjson = require "./node_modules/#{packageName}/package.json"
+      @packages[packageName].current = pjson.version
+    catch err
+      @log.error err
+      @log.warn "Package #{packageName} does not exist, so this must be the first run."
+      @packages[packageName].current = null
 
-	# Watches github for new releases
-	watchReleases: ->
-		# Check on an interval
-		setInterval =>
-			@checkOutdated()
-		, @interval
+  # Watches github for new releases
+  watchReleases: ->
+    # Check on an interval
+    setInterval =>
+      @checkOutdated()
+    , @interval
 
-		# Check for releases right away
-		# @checkOutdated()
+    # Check for releases right away
+    # @checkOutdated()
 
-	# Gets the tag of the latest release
-	checkOutdated: ->
+  # Gets the tag of the latest release
+  checkOutdated: ->
 
-		# run the npm outdated command to get a list of outdated packages
-		# check for any with the rbn prefix
-		# if found, do an npm update
-		@log.info 'checking for outdated packages...'
-		@npm.commands.outdated (err, outdated) =>
-			needsUpdate = false
-			unless err
-				# console.log outdated
-				for pack in outdated
-					# If name starts with rbn-
-					if pack[1][0...4] is 'rbn-'
-						console.log "#{pack[1]}: #{pack[3]} > #{pack[2]}"
-						# If version can update
-						if semver.valid(pack[2]) and semver.valid(pack[3]) and semver.gt(pack[3], pack[2])
-							# Needs an update!
-							needsUpdate = true
-							break
-				
-				# Update if necessary
-				if needsUpdate
-					@update() unless @updating
-			else
-				@log.error err
+    # run the npm outdated command to get a list of outdated packages
+    # check for any with the rbn prefix
+    # if found, do an npm update
+    @log.info 'checking for outdated packages...'
+    @npm.commands.outdated (err, outdated) =>
+      needsUpdate = false
+      unless err
+        # console.log outdated
+        for pack in outdated
+          # If name starts with rbn-
+          if pack[1][0...4] is 'rbn-'
+            console.log "#{pack[1]}: #{pack[3]} > #{pack[2]}"
+            # If version can update
+            if semver.valid(pack[2]) and semver.valid(pack[3]) and semver.gt(pack[3], pack[2])
+              # Needs an update!
+              needsUpdate = true
+              break
 
-	update: ->
-		# Stop the current module if running
-		@log.info 'stopping current module...'
-		@stopRunning =>
-			@updating = true
-			# Update the npm modules
-			@npm.commands.update (err) =>
-				console.log err
-				unless err
-					@log.info "Updated successfully!"
-					@updating = false
-					@startRunning()
-				else
-					@log.error "Error updating"
-					console.log err
-					@updating = false
+        # Update if necessary
+        if needsUpdate
+          @update() unless @updating
+      else
+        @log.error err
 
-	install: (callback=null) ->
-		# Install the module
-		@log.info 'installing!'
-		@updating = true
-		@npm.commands.install (err) =>
-			unless err
-				@log.info "Installed successfully!"
-				@startRunning()
-				@updating = false
-				callback()
-			else
-				@log.error "Error installing"
-				console.log err
-				@updating = false
+  update: ->
+    # Stop the current module if running
+    @log.info 'stopping current module...'
+    @stopRunning =>
+      @updating = true
+      # Update the npm modules
+      @npm.commands.update (err) =>
+        console.log err
+        unless err
+          @log.info "Updated successfully!"
+          @updating = false
+          @startRunning()
+        else
+          @log.error "Error updating"
+          console.log err
+          @updating = false
 
-	stopRunning: (callback=null) ->
-		# Stop any running software.
-		# Kill with a stop code that allows the os to emit an "updating" event before exiting
-		@log.info 'stopping old os...'
-		if @running
-			emitter = @running.stop()
-			emitter.on 'stop', =>
-				@log.info 'stopped running successfully'
-				callback()
-		else
-			callback() if callback
-		
+  install: (callback=null) ->
+    # Install the module
+    @log.info 'installing!'
+    @updating = true
+    @npm.commands.install (err) =>
+      unless err
+        @log.info "Installed successfully!"
+        @startRunning()
+        @updating = false
+        callback()
+      else
+        @log.error "Error installing"
+        console.log err
+        @updating = false
 
-	startRunning: ->
-		# Start the software in the current directory
-		@log.info 'starting os...'
+  stopRunning: (callback=null) ->
+    # Stop any running software.
+    # Kill with a stop code that allows the os to emit an "updating" event before exiting
+    @log.info 'stopping old os...'
+    if @running
+      emitter = @running.stop()
+      emitter.on 'stop', =>
+        @log.info 'stopped running successfully'
+        callback()
+    else
+      callback() if callback
 
-		pjson = require "./node_modules/rbn-base/package.json"
 
-		startScript = pjson.main
+  startRunning: ->
+    # Start the software in the current directory
+    @log.info 'starting os...'
 
-		if startScript
+    pjson = require "./node_modules/bifrost-hub/package.json"
 
-			@running = new forever.Monitor "./node_modules/rbn-base/#{startScript}.js",
-				silent: false
-				command: 'node'
+    startScript = pjson.main
 
-			# Start/stop listeners
-			@running.on 'start', (process, data) =>
-				@log.info 'script started successfully!'
-				@emit 'startedRunning'
-			@running.on 'stop', =>
-				@emit 'stoppedRunning'
+    if startScript
 
-			# Actually start the process
-			@running.start()
-		else
-			@log.error "No start script in package.json - make sure you have a {'scripts':{'start':'someScript.js'}}"
+      @running = new forever.Monitor "./node_modules/bifrost-hub/#{startScript}.js",
+        silent: false
+        command: 'node'
+
+      # Start/stop listeners
+      @running.on 'start', (process, data) =>
+        @log.info 'script started successfully!'
+        @emit 'startedRunning'
+      @running.on 'stop', =>
+        @emit 'stoppedRunning'
+
+      # Actually start the process
+      @running.start()
+    else
+      @log.error "No start script in package.json - make sure you have a {'scripts':{'start':'someScript.js'}}"
 
 supervisor = new Supervisor config.NpmPackageName

@@ -1,1 +1,1 @@
-@reboot pi /home/pi/rbn-pi/start.sh
+@reboot pi /home/pi/bifrost/start.sh
