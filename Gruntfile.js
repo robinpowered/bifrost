@@ -10,7 +10,7 @@ var path = require('path');
       pkg: grunt.file.readJSON('package.json'),
       coffeelint: {
         lib: {
-          src: ['./*.coffee']
+          src: ['*.coffee', 'lib/**/*.coffee'],
         },
         options: {
           no_trailing_whitespace: {
