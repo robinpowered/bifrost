@@ -1,3 +1,5 @@
+var path = require('path');
+
 (function() {
   module.exports = function(grunt) {
     'use strict';
@@ -23,8 +25,8 @@
         all: {
           expand: true,
           cwd: './',
-          src: ['*.coffee'],
-          dest: '.',
+          src: ['*.coffee', 'lib/**/*.coffee'],
+          dest: path.resolve(__dirname, 'dist'),
           ext: '.js'
         },
       },
@@ -97,6 +99,8 @@
 
       // 'rsync:pi'
     });
+    var defaultTasks = ['compile'];
+    grunt.registerTask('default', defaultTasks);
     return grunt.registerTask('pi', ['compile', 'rsync_pi']);
   };
 
