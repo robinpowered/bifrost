@@ -21,13 +21,18 @@
     function Supervisor() {
       var _this = this;
       this.log.info('Started supervisor!');
-      this.interval = 300000;
+      this.interval = config.updateInterval * 1000;
       this.updating = false;
       this.packages = {};
       NPM.load(function(err, npm) {
         _this.npm = npm;
         _this.startRunning();
-        return _this.watchReleases();
+        if (config.autoUpdate) {
+          _this.log.info("Setting auto update interval: " + _this.interval + " secs");
+          return _this.watchReleases();
+        } else {
+          return _this.log.info("Auto update not configured");
+        }
       });
     }
 

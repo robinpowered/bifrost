@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-cli": "~0.1.7",
+    "grunt-cli": "^0.1.13",
     "grunt-contrib-copy": "~0.4.0",
     "grunt-contrib-concat": "~0.1.3",
     "grunt-contrib-coffee": "~0.6.4",
@@ -25,7 +25,9 @@
     "winston": "~0.7.2",
     "semver": "~2.2.1",
     "forever-monitor": "~1.2.3",
-    "npm": "~1.4.3"
+    "npm": "~1.4.3",
+    "rbn-rfid": "git+ssh://git@github.com/robinpowered/rbn-rfid.git",
+    "rbn-arduino": "git+ssh://git@github.com/robinpowered/rbn-arduino.git"
   },
   "TODO": {
     "bifrost-hub": "git+ssh://git@github.com/robinpowered/bifrost-hub.git",

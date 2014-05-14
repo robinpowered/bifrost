@@ -13,7 +13,7 @@ class Supervisor extends EventEmitter
     @log.info 'Started supervisor!'
 
     # Polling interval!
-    @interval = 300000 # 5 minutes
+    @interval = config.updateInterval * 1000 # Convert to milliseconds
 
     # Updating flag
     @updating = false
@@ -26,7 +26,11 @@ class Supervisor extends EventEmitter
       # Start the script
       @startRunning()
       # Poll for new releases every once in a while
-      @watchReleases()
+      if config.autoUpdate
+        @log.info "Setting auto update interval: #{@interval} secs"
+        @watchReleases()
+      else
+        @log.info "Auto update not configured"
 
   log: winston
 

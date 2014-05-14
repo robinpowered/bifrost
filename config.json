@@ -1,10 +1,13 @@
 {
   "NpmPackageName": "colors",
   "autoUpdate": false,
+  "updateInterval": 86400,
   "runOnBoot": false,
   "transports": {
     "rbn-websocket": {
-        "endpoint": "http://robin-grid.omrdev.com"
+        "endpoint": "http://robin-grid.omrdev.com",
+        "accessToken": "blade",
+        "deviceIdentifier": "batwall-1"
     }
   },
   "interfaces": {
