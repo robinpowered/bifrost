@@ -25,7 +25,15 @@
     "winston": "~0.7.2",
     "semver": "~2.2.1",
     "forever-monitor": "~1.2.3",
-    "npm": "~1.4.3"
+    "npm": "~1.4.3",
+    "getmac": "~1.0.5",
+    "q": "~1.0.0",
+    "pkginfo" : "~0.3.0",
+    "bifrost-hub": "git+ssh://git@github.com/robinpowered/bifrost-hub.git",
+    "rbn-websocket": "git+ssh://git@github.com/robinpowered/rbn-websocket.git",
+    "rbn-ble": "git+ssh://git@github.com/robinpowered/rbn-ble.git",
+    "rbn-rfid": "git+ssh://git@github.com/robinpowered/rbn-rfid.git",
+    "rbn-arduino": "git+ssh://git@github.com/robinpowered/rbn-arduino.git"
   },
   "TODO": {
     "bifrost-hub": "git+ssh://git@github.com/robinpowered/bifrost-hub.git",
