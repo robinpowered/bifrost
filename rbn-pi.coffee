@@ -1,5 +1,3 @@
-BaseStation = require './lib/base-station'
-Supervisor = require './lib/supervisor'
+Bifrost = require './lib/bifrost'
 
-baseStation = new BaseStation
-supervisor = new Supervisor
+app = new Bifrost()
