@@ -1,3 +1,5 @@
+var path = require('path');
+
 (function() {
   module.exports = function(grunt) {
     'use strict';
@@ -8,7 +10,7 @@
       pkg: grunt.file.readJSON('package.json'),
       coffeelint: {
         lib: {
-          src: ['./*.coffee']
+          src: ['*.coffee', 'lib/**/*.coffee'],
         },
         options: {
           no_trailing_whitespace: {
@@ -23,8 +25,8 @@
         all: {
           expand: true,
           cwd: './',
-          src: ['*.coffee'],
-          dest: '.',
+          src: ['*.coffee', 'lib/**/*.coffee'],
+          dest: path.resolve(__dirname, 'dist'),
           ext: '.js'
         },
       },
@@ -64,12 +66,19 @@
             remoteBase: "/home/pi/bifrost"
           }
         }
+      },
+      watch: {
+        coffee: {
+          files: ['**/*.coffee'],
+          tasks: ['coffee', 'copy']
+        }
       }
     });
     grunt.loadNpmTasks('grunt-coffeelint');
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-rsync-2');
     grunt.registerTask('lint', ['coffeelint']);
     grunt.registerTask('compile', [
@@ -97,6 +106,8 @@
 
       // 'rsync:pi'
     });
+    var defaultTasks = ['compile'];
+    grunt.registerTask('default', defaultTasks);
     return grunt.registerTask('pi', ['compile', 'rsync_pi']);
   };
 

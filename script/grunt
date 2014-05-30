@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+var cp = require('./utils/child-process-wrapper.js');
+var path = require('path');
+
+// node build/node_modules/.bin/grunt "$@"
+var gruntPath = path.resolve(__dirname, '..', 'build', 'node_modules', '.bin', 'grunt');
+var args = ['--gruntfile', path.resolve('Gruntfile.js')];
+args = args.concat(process.argv.slice(2));
+cp.safeSpawn(gruntPath, args, process.exit);

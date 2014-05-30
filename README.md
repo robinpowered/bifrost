@@ -1,7 +1,7 @@
 rbn
 ==========
 
-This is a bit of software that was built for the raspberry pi, but should work on any linux box. It's good at doing things like passing data from bluetooth low energy devices over a websocket connection, or sending data from a connected arduino up to firebase. It consists of two parts - interfaces and transports.
+This is a bit of software that was built for the raspberry rbn, but should work on any linux box. It's good at doing things like passing data from bluetooth low energy devices over a websocket connection, or sending data from a connected arduino up to firebase. It consists of two parts - interfaces and transports.
 
 Interfaces
 ===
@@ -31,7 +31,7 @@ Easy Mode
 1. Install raspbian on your Pi.
 2. SSH onto your pi.
 3. Run `curl -h http://...`
-4. Run `sudo node rbn-pi.js`
+4. Run `sudo node app.js`
 
 Configuration
 ===
@@ -64,7 +64,7 @@ Streaming logs and debugging
 
 Every module emits logs on a [debug](github.com/visionmedia/debug) namespace equal to the name of the module. There is also a `base` namespace with the most general logs. To listen on a namespace, run pass a `DEBUG` argument to node, like so:
 
-`sudo DEBUG=base,websocket,ble node rbn-pi.js`
+`sudo DEBUG=base,websocket,ble node app.js`
 
 If you're looking to stream logs out to a service, you should write a transport to do so!
 

@@ -1,12 +1,14 @@
-# request = require 'request'
 winston = require 'winston'
 {EventEmitter} = require 'events'
 # request = require 'request'
 semver = require 'semver'
 forever = require 'forever-monitor'
 NPM = require 'npm'
-config = require './config.json'
+debug = require('debug')('supervisor')
 
+config = require '../config.json'
+
+module.exports =
 class Supervisor extends EventEmitter
 
   constructor: ()->
@@ -64,7 +66,7 @@ class Supervisor extends EventEmitter
         for pack in outdated
           # If name starts with rbn-
           if pack[1][0...4] is 'rbn-'
-            console.log "#{pack[1]}: #{pack[3]} > #{pack[2]}"
+            debug "#{pack[1]}: #{pack[3]} > #{pack[2]}"
             # If version can update
             if semver.valid(pack[2]) and semver.valid(pack[3]) and semver.gt(pack[3], pack[2])
               # Needs an update!
@@ -84,14 +86,14 @@ class Supervisor extends EventEmitter
       @updating = true
       # Update the npm modules
       @npm.commands.update (err) =>
-        console.log err
+        @log err
         unless err
           @log.info "Updated successfully!"
           @updating = false
           @startRunning()
         else
           @log.error "Error updating"
-          console.log err
+          @log err
           @updating = false
 
   install: (callback=null) ->
@@ -106,7 +108,7 @@ class Supervisor extends EventEmitter
         callback()
       else
         @log.error "Error installing"
-        console.log err
+        @log err
         @updating = false
 
   stopRunning: (callback=null) ->
@@ -126,7 +128,7 @@ class Supervisor extends EventEmitter
     # Start the software in the current directory
     @log.info 'starting os...'
 
-    pjson = require "./node_modules/bifrost-hub/package.json"
+    pjson = require('pkginfo')(module)
 
     startScript = pjson.main
 
@@ -147,5 +149,3 @@ class Supervisor extends EventEmitter
       @running.start()
     else
       @log.error "No start script in package.json - make sure you have a {'scripts':{'start':'someScript.js'}}"
-
-supervisor = new Supervisor config.NpmPackageName
