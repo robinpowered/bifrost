@@ -4,7 +4,9 @@
   "runOnBoot": false,
   "transports": {
     "rbn-websocket": {
-        "endpoint": "http://robin-grid.omrdev.com"
+        "accessToken": "d3m0t0k3n",
+        "identifier": "demo-base-station",
+        "endpoint": "http://grid.demo.robinpowered.com"
     }
   },
   "interfaces": {
